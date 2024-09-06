@@ -25,7 +25,7 @@
 
         &--selected {
             position: relative;
-            outline: 3px solid $color-primary;
+            outline: 3px solid $color-primary-500;
 
             &::before {
                 content: '';

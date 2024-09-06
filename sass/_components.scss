@@ -7,7 +7,7 @@
 
     width: 5rem;
     height: 5rem;
-    margin-left: 4rem;
+    margin-left: 4.618rem;
 }
 
 .cart-btn {
@@ -16,7 +16,7 @@
     cursor: pointer;
 }
 
-.btn-cart {
+.btn {
     border: none;
     display: flex;
     align-items: center;
@@ -25,16 +25,19 @@
     font-weight: $fw-bold;
     cursor: pointer;
 
-    background-color: $color-primary;
+    background-color: $color-primary-500;
+    box-shadow: 0 2rem 5rem -2rem $color-primary-500;
     border-radius: 1rem;
     max-width: 27.2rem;
     width: 100%;
     height: 5.6rem;
 
-    &__icon {
-        width: 2.2rem;
-        height: 2rem;
-        fill: $color-neutral-950;
+    transition: background-color 0.2s ease-in;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: $color-primary-300;
     }
 }
 
@@ -68,4 +71,10 @@
             appearance: none;
         }
     }
+}
+
+.cart-icon {
+    width: 2.2rem;
+    height: 2rem;
+    fill: $color-neutral-950;
 }
