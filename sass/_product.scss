@@ -1,0 +1,48 @@
+@use 'variables' as *;
+
+.product {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 12.5rem;
+
+    &__gallery {
+    }
+
+    &__content {
+        align-self: center;
+    }
+
+    &__brand-text {
+        text-transform: uppercase;
+        font-weight: $fw-bold;
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+    }
+
+    &__price {
+        display: flex;
+        gap: 2.3rem;
+
+        span {
+            font-size: $fs-body;
+            background-color: $color-neutral-950;
+            color: $color-neutral-100;
+            padding: 0.3rem 1rem;
+            line-height: 1.25;
+            border-radius: 0.6rem;
+            align-self: flex-start;
+        }
+    }
+
+    &__price-old {
+        color: $color-neutral-700;
+        font-weight: $fw-bold;
+        text-decoration: line-through;
+    }
+
+    &__buy {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+    }
+}

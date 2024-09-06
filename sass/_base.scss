@@ -1,0 +1,54 @@
+@use 'variables' as *;
+
+body {
+    color: $color-neutral-700;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $color-neutral-900;
+}
+
+.header {
+    max-width: 111rem;
+    min-height: 5rem;
+    margin: 2.8rem auto;
+    margin-bottom: 9rem;
+    padding-bottom: 3.4rem;
+    border-bottom: 1px solid $color-neutral-400;
+
+    display: grid;
+    grid-template-columns: max-content 1fr max-content max-content;
+    align-items: center;
+
+    &__logo {
+        margin-right: 5.65rem;
+    }
+}
+
+.navigation {
+    &__list {
+        display: flex;
+        gap: 3.3rem;
+    }
+
+    &__item {
+    }
+
+    &__link {
+        &:link,
+        &:visited {
+            color: $color-neutral-700;
+            text-decoration: none;
+        }
+    }
+}
+
+.main {
+    max-width: 101.5rem;
+    margin: 0 auto;
+}
