@@ -14,6 +14,37 @@
     border: none;
     background: none;
     cursor: pointer;
+    position: relative;
+
+    &__wrapper {
+        position: relative;
+    }
+
+    &__amount {
+        width: 1.9rem;
+        height: 1.3rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: $fw-bold;
+        background-color: $color-primary-500;
+        color: $color-neutral-100;
+        border-radius: 0.65rem;
+
+        visibility: hidden;
+        opacity: 0;
+
+        &--show {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
 }
 
 .btn {
@@ -77,4 +108,44 @@
     width: 2.2rem;
     height: 2rem;
     fill: $color-neutral-950;
+}
+
+.cart-modal {
+    display: grid;
+    grid-template-rows: min-content auto;
+    visibility: hidden;
+    opacity: 0;
+
+    transition: opacity 0.2s ease-in-out;
+
+    &--show {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    width: 36rem;
+    min-height: 25.6rem;
+    padding: 2.4rem 0;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 3rem);
+
+    background-color: $color-neutral-100;
+    border-radius: 1rem;
+    box-shadow: 0 2rem 5rem -2rem rgba($color-neutral-900, 0.5);
+    font-weight: $fw-bold;
+
+    &__title {
+        color: $color-neutral-900;
+        padding: 0 2.4rem;
+        padding-bottom: 2.7rem;
+        border-bottom: 1px solid $color-neutral-400;
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
