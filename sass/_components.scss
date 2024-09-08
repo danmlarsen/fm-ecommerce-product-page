@@ -116,12 +116,7 @@
     visibility: hidden;
     opacity: 0;
 
-    transition: opacity 0.2s ease-in-out;
-
-    &--show {
-        visibility: visible;
-        opacity: 1;
-    }
+    transition: all 0.2s ease-in-out;
 
     width: 36rem;
     min-height: 25.6rem;
@@ -134,10 +129,15 @@
     background-color: $color-neutral-100;
     border-radius: 1rem;
     box-shadow: 0 2rem 5rem -2rem rgba($color-neutral-900, 0.5);
-    font-weight: $fw-bold;
+
+    &--show {
+        visibility: visible;
+        opacity: 1;
+    }
 
     &__title {
         color: $color-neutral-900;
+        font-weight: $fw-bold;
         padding: 0 2.4rem;
         padding-bottom: 2.7rem;
         border-bottom: 1px solid $color-neutral-400;
@@ -145,7 +145,42 @@
 
     &__content {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    &__list {
+        margin: 2.4rem 0;
+    }
+
+    &__list-item {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__item-img {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    &__item-price {
+        &--total {
+            font-weight: $fw-bold;
+            color: $color-neutral-950;
+        }
+    }
+
+    &__remove-item-btn {
+        width: 1.4rem;
+        height: 1.6rem;
+        border: 0;
+        background: none;
+        cursor: pointer;
     }
 }

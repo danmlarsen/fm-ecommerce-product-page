@@ -11,6 +11,10 @@ export class Amount {
         return +this.inputElement.value;
     }
 
+    reset(): void {
+        this.inputElement.value = '0';
+    }
+
     onIncrement(): void {
         if (+this.inputElement.value >= +this.inputElement.max) return;
 
