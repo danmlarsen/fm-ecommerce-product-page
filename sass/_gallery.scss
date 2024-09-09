@@ -52,14 +52,12 @@
     }
 
     &__btn {
+        display: none;
         width: 4rem;
         height: 4rem;
         background-color: $color-neutral-100;
         border: none;
         border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         cursor: pointer;
 
         position: absolute;
@@ -73,6 +71,12 @@
         &--previous {
             left: 0;
             transform: translateX(1.6rem);
+        }
+
+        @include respond-to('small') {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }
