@@ -5,16 +5,26 @@
     display: grid;
     row-gap: 3.2rem;
 
+    &--lightbox {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+    }
+
     &__large {
         // max-width: 44.5rem;
-        max-width: 60rem;
+        max-width: 55rem;
         // height: 44.5rem;
         border-radius: 1.5rem;
         overflow: hidden;
         position: relative;
+        cursor: pointer;
 
         @include respond-to('small') {
             border-radius: 0;
+            cursor: auto;
         }
     }
 
@@ -78,5 +88,20 @@
             justify-content: center;
             align-items: center;
         }
+    }
+
+    &__close-btn {
+        justify-self: end;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    &__close-icon {
+        width: 2rem;
+        height: 2rem;
     }
 }

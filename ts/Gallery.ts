@@ -9,6 +9,9 @@ import thumb4 from '../assets/images/image-product-4-thumbnail.jpg';
 
 import nextIcon from '../assets/images/icon-next.svg';
 import prevIcon from '../assets/images/icon-previous.svg';
+import closeIcon from '../assets/images/icon-close.svg';
+
+const SMALL_SCREEN_WIDTH = 768;
 
 interface imageItem {
     imgPath: string;
@@ -29,9 +32,19 @@ export class Gallery {
 
     largeImageElement: HTMLImageElement;
     thumbsDivElement: HTMLElement;
+    backdrop: HTMLElement | null;
 
-    constructor(private parentElement: Element) {
-        this.renderGallery();
+    constructor(private parentElement: Element, private isLightbox = false) {
+        if (isLightbox) {
+            this.renderLightbox();
+
+            parentElement.querySelector('.gallery__close-btn')!.addEventListener('click', () => {
+                this.backdrop?.remove();
+                this.parentElement.remove();
+            });
+        } else {
+            this.renderGallery();
+        }
 
         this.largeImageElement = this.parentElement.querySelector('.gallery__large-img')!;
         this.thumbsDivElement = this.parentElement.querySelector('.gallery__thumbs')!;
@@ -39,6 +52,12 @@ export class Gallery {
         this.thumbsDivElement.addEventListener('click', this.onClickThumbnail.bind(this));
         this.parentElement.querySelector('.gallery__btn--previous')!.addEventListener('click', this.previousImage.bind(this));
         this.parentElement.querySelector('.gallery__btn--next')!.addEventListener('click', this.nextImage.bind(this));
+
+        this.largeImageElement.addEventListener('click', () => {
+            if (window.innerWidth < SMALL_SCREEN_WIDTH) return;
+
+            new Gallery(document.body, true);
+        });
 
         // this.interval = setInterval(() => {
         //     this.nextImage();
@@ -114,5 +133,38 @@ export class Gallery {
         `;
 
         this.parentElement.innerHTML = markup;
+    }
+
+    renderLightbox(): void {
+        this.backdrop = document.createElement('div');
+        this.backdrop.classList.add('backlight');
+        document.body.append(this.backdrop);
+
+        this.parentElement = document.createElement('div');
+        this.parentElement.classList.add('gallery');
+        this.parentElement.classList.add('gallery--lightbox');
+        this.parentElement.innerHTML = `
+                <button class="gallery__close-btn">
+                    <img src="${closeIcon}" alt="Close icon" class="gallery__close-icon" />
+                </button>
+                <figure class="gallery__large">
+                    <img src="${image1}" alt="Sneakers" class="gallery__large-img" />
+                    <button class="gallery__btn gallery__btn--previous">
+                        <img src="${prevIcon}" alt="Left arrow icon">
+                    </button>
+                    <button class="gallery__btn gallery__btn--next">
+                        <img src="${nextIcon}" alt="Right arrow icon">
+                    </button>
+                </figure>
+                <div class="gallery__thumbs">
+                    <figure class="gallery__thumbnail gallery__thumbnail--selected">
+                        <img src="${thumb1}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="0" />
+                    </figure>
+                    <figure class="gallery__thumbnail"><img src="${thumb2}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="1" /></figure>
+                    <figure class="gallery__thumbnail"><img src="${thumb3}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="2" /></figure>
+                    <figure class="gallery__thumbnail"><img src="${thumb4}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="3" /></figure>
+                </div>
+        `;
+        document.body.append(this.parentElement);
     }
 }

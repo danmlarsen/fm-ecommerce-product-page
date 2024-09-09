@@ -15,8 +15,9 @@ h6 {
 }
 
 .header {
-    max-width: 113.8rem;
+    max-width: 115.8rem;
     min-height: 8.4rem;
+    // min-height: 5rem;
     margin: 2.8rem auto;
     margin-bottom: 9rem;
     padding: 0 2.4rem;
@@ -33,6 +34,8 @@ h6 {
 }
 
 .navigation {
+    display: flex;
+    align-items: center;
     font-size: 1.5rem;
     align-self: stretch;
 
@@ -46,31 +49,45 @@ h6 {
 
     &__list {
         display: flex;
+        align-items: center;
         height: 100%;
         gap: 3.3rem;
     }
 
     &__item {
+        display: flex;
+        align-items: center;
         height: 100%;
+        position: relative;
     }
 
     &__link {
         display: flex;
         align-items: center;
-        height: 100%;
 
         &:link,
         &:visited {
             color: $color-neutral-700;
             text-decoration: none;
-            border-bottom: 4px solid transparent;
-            transition: 0.2s border ease-in;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background-color: transparent;
+                transition: 0.2s all ease-in;
+            }
         }
 
         &:hover,
         &:active,
         &:focus {
-            border-color: $color-primary-500;
+            &::after {
+                background-color: $color-primary-500;
+            }
         }
     }
 }
