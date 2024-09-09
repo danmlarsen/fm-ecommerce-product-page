@@ -6,7 +6,7 @@ const addToCartBtnElement = document.querySelector('.btn__add-to-cart')!;
 const openCartModalBtnElement = document.querySelector('.cart-btn')!;
 const cartModalElement = document.querySelector('.cart-modal')! as HTMLElement;
 
-const cart = new Cart();
+const cart = new Cart(document.querySelector('.cart-modal')!, document.querySelector('.cart-btn')!);
 const amount = new Amount(document.querySelector('.amount')!);
 
 addToCartBtnElement.addEventListener('click', () => {

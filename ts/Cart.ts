@@ -10,6 +10,9 @@ interface CartItem {
 export class Cart {
     private items: CartItem[] = [];
 
+    constructor(private modalElement: HTMLElement, private btnElement: HTMLElement) {
+    }
+
     calcTotalAmount(): number {
         return this.items.reduce((acc, cur) => acc + cur.amount, 0);
     }
@@ -33,16 +36,16 @@ export class Cart {
     }
 
     renderAmount(): void {
-        const cartBtnElement = document.querySelector('.cart-btn__amount')!;
+        const cartAmountElement = this.btnElement.querySelector('.cart-btn__amount')!;
 
         const totalAmount = this.calcTotalAmount();
 
         if (totalAmount === 0) {
-            cartBtnElement.classList.remove('cart-btn__amount--show');
+            cartAmountElement.classList.remove('cart-btn__amount--show');
         }
         else {
-            cartBtnElement.textContent = totalAmount.toString();
-            cartBtnElement.classList.add('cart-btn__amount--show');
+            cartAmountElement.textContent = totalAmount.toString();
+            cartAmountElement.classList.add('cart-btn__amount--show');
         }
     }
 
@@ -70,6 +73,6 @@ export class Cart {
                 <button class="btn">Checkout</button>
             `;
         }
-        document.querySelector('.cart-modal__content')!.innerHTML = markup;
+        this.modalElement.querySelector('.cart-modal__content')!.innerHTML = markup;
     }
 }
