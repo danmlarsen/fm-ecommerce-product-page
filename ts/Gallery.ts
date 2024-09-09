@@ -7,6 +7,9 @@ import thumb2 from '../assets/images/image-product-2-thumbnail.jpg';
 import thumb3 from '../assets/images/image-product-3-thumbnail.jpg';
 import thumb4 from '../assets/images/image-product-4-thumbnail.jpg';
 
+import nextIcon from '../assets/images/icon-next.svg';
+import prevIcon from '../assets/images/icon-previous.svg';
+
 interface imageItem {
     imgPath: string;
     thumbPath: string;
@@ -34,20 +37,22 @@ export class Gallery {
         this.thumbsDivElement = this.parentElement.querySelector('.gallery__thumbs')!;
 
         this.thumbsDivElement.addEventListener('click', this.onClickThumbnail.bind(this));
+        this.parentElement.querySelector('.gallery__btn--previous')!.addEventListener('click', this.previousImage.bind(this));
+        this.parentElement.querySelector('.gallery__btn--next')!.addEventListener('click', this.nextImage.bind(this));
 
-        this.interval = setInterval(() => {
-            this.nextImage();
-        }, 5000);
+        // this.interval = setInterval(() => {
+        //     this.nextImage();
+        // }, 5000);
     }
 
     onClickThumbnail(e: Event): void {
         const target = e.target as HTMLImageElement;
         if (!target || !target.dataset.imageIndex) return;
 
-        clearInterval(this.interval);
-        this.interval = setInterval(() => {
-            this.nextImage();
-        }, 5000);
+        // clearInterval(this.interval);
+        // this.interval = setInterval(() => {
+        //     this.nextImage();
+        // }, 5000);
 
         const index = +target.dataset.imageIndex;
         this.selectImage(index);
@@ -75,13 +80,24 @@ export class Gallery {
         this.selectImage(newIndex);
     }
 
-    previousImage(): void {}
+    previousImage(): void {
+        const newIndex = this.selectedImageIndex === 0 ? this.images.length - 1 : this.selectedImageIndex - 1;
+
+        this.selectImage(newIndex);
+    }
 
     renderGallery(): void {
         const markup = `
             <div class="gallery">
                 <figure class="gallery__large">
                     <img src="${image1}" alt="Sneakers" class="gallery__large-img" />
+
+                    <button class="gallery__btn gallery__btn--previous">
+                        <img src="${prevIcon}" alt="Left arrow icon">
+                    </button>
+                    <button class="gallery__btn gallery__btn--next">
+                        <img src="${nextIcon}" alt="Right arrow icon">
+                    </button>
                 </figure>
                 <div class="gallery__thumbs">
 
@@ -93,6 +109,7 @@ export class Gallery {
                     <figure class="gallery__thumbnail"><img src="${thumb4}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="3" /></figure>
 
                 </div>
+
             </div>
         `;
 

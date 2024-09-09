@@ -1,9 +1,16 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 .product {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 12.5rem;
+    gap: 12.5rem;
+
+    @include respond-to('medium') {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 2.4rem;
+    }
 
     &__gallery {
     }
@@ -11,7 +18,12 @@
     &__content {
         align-self: center;
         min-height: 42.6rem;
+        max-width: 60rem;
         margin-bottom: 2rem;
+
+        @include respond-to('small') {
+            padding: 0 2.4rem;
+        }
     }
 
     &__brand-text {
@@ -46,5 +58,9 @@
         display: flex;
         align-items: center;
         gap: 1.6rem;
+
+        @include respond-to('small') {
+            flex-direction: column;
+        }
     }
 }

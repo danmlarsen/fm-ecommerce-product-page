@@ -21,3 +21,12 @@ $fs-heading-lg: 4.4rem;
 $fs-heading-md: 2.8rem;
 $fw-regular: 400;
 $fw-bold: 700;
+
+$breakpoints: (
+    'medium': (
+        max-width: 64em,
+    ),
+    'small': (
+        max-width: 48em,
+    ),
+);

@@ -1,19 +1,31 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 .gallery {
     display: grid;
     row-gap: 3.2rem;
 
     &__large {
-        max-width: 44.5rem;
-        height: 44.5rem;
+        // max-width: 44.5rem;
+        max-width: 60rem;
+        // height: 44.5rem;
         border-radius: 1.5rem;
         overflow: hidden;
+        position: relative;
+
+        @include respond-to('small') {
+            border-radius: 0;
+        }
     }
 
     &__thumbs {
         display: flex;
+        justify-content: center;
         gap: 3.1rem;
+
+        @include respond-to('small') {
+            display: none;
+        }
     }
 
     &__thumbnail {
@@ -36,6 +48,31 @@
                 height: 100%;
                 background-color: rgba($color-neutral-100, 0.75);
             }
+        }
+    }
+
+    &__btn {
+        width: 4rem;
+        height: 4rem;
+        background-color: $color-neutral-100;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        position: absolute;
+        top: 50%;
+
+        &--next {
+            right: 0;
+            transform: translateX(-1.6rem);
+        }
+
+        &--previous {
+            left: 0;
+            transform: translateX(1.6rem);
         }
     }
 }

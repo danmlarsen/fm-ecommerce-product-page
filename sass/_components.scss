@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 .user-btn {
     border: none;
@@ -121,14 +122,21 @@
     width: 36rem;
     min-height: 25.6rem;
     padding: 2.4rem 0;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, 3rem);
+    position: fixed;
+    z-index: 10;
+    top: 9.4rem;
+    right: 8.9rem;
+    // transform: translate(0, 3rem);
 
     background-color: $color-neutral-100;
     border-radius: 1rem;
     box-shadow: 0 2rem 5rem -2rem rgba($color-neutral-900, 0.5);
+
+    @include respond-to('small') {
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
     &--show {
         visibility: visible;
