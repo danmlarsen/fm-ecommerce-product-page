@@ -137,7 +137,7 @@ export class Gallery {
 
     renderLightbox(): void {
         this.backdrop = document.createElement('div');
-        this.backdrop.classList.add('backlight');
+        this.backdrop.classList.add('backdrop');
         document.body.append(this.backdrop);
 
         this.parentElement = document.createElement('div');

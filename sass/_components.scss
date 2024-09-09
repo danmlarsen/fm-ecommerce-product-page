@@ -9,9 +9,17 @@
     width: 5rem;
     height: 5rem;
     margin-left: 4.618rem;
+
+    @include respond-to('small') {
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-left: 2.218rem;
+    }
 }
 
 .cart-btn {
+    width: 2.182rem;
+    height: 2rem;
     border: none;
     background: none;
     cursor: pointer;
@@ -19,6 +27,8 @@
 
     &__wrapper {
         position: relative;
+        width: 2.182rem;
+        height: 2rem;
     }
 
     &__amount {
@@ -60,8 +70,9 @@
     background-color: $color-primary-500;
     box-shadow: 0 2rem 5rem -2rem $color-primary-500;
     border-radius: 1rem;
-    max-width: 27.2rem;
+
     width: 100%;
+    max-width: 31.2rem;
     height: 5.6rem;
 
     transition: background-color 0.2s ease-in;
@@ -70,6 +81,14 @@
     &:active,
     &:focus {
         background-color: $color-primary-300;
+    }
+
+    &--add-to-cart {
+        max-width: 27.2rem;
+
+        @include respond-to('small') {
+            max-width: none;
+        }
     }
 }
 
@@ -80,6 +99,10 @@
     display: flex;
     background-color: $color-neutral-300;
     border-radius: 1rem;
+
+    @include respond-to('small') {
+        max-width: none;
+    }
 
     & > * {
         border: none;
@@ -93,6 +116,7 @@
 
     &__btn {
         cursor: pointer;
+        flex: 0 1 8rem;
     }
 
     &__input {
@@ -122,18 +146,24 @@
     width: 36rem;
     min-height: 25.6rem;
     padding: 2.4rem 0;
-    position: fixed;
+    position: absolute;
     z-index: 10;
-    top: 9.4rem;
-    right: 8.9rem;
+    // top: 9.4rem;
+    // right: 8.9rem;
     // transform: translate(0, 3rem);
+    top: 0;
+    left: 0;
+    transform: translate(-50%, 3rem);
 
     background-color: $color-neutral-100;
     border-radius: 1rem;
     box-shadow: 0 2rem 5rem -2rem rgba($color-neutral-900, 0.5);
 
     @include respond-to('small') {
+        position: fixed;
         width: 100%;
+        max-width: 36rem;
+        top: 7.6rem;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -156,6 +186,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding: 0 2.4rem;
     }
 
     &__list {
@@ -193,7 +224,7 @@
     }
 }
 
-.backlight {
+.backdrop {
     position: fixed;
     top: 0;
     left: 0;

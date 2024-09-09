@@ -11,6 +11,21 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 100;
+
+        .gallery__large {
+            overflow: visible;
+        }
+
+        .gallery__btn {
+            display: flex;
+
+            &--previous {
+                transform: translate(-50%, -50%);
+            }
+            &--next {
+                transform: translate(50%, -50%);
+            }
+        }
     }
 
     &__large {
@@ -63,30 +78,32 @@
 
     &__btn {
         display: none;
-        width: 4rem;
-        height: 4rem;
+        width: 5.6rem;
+        height: 5.6rem;
         background-color: $color-neutral-100;
         border: none;
         border-radius: 50%;
         cursor: pointer;
+        justify-content: center;
+        align-items: center;
 
         position: absolute;
         top: 50%;
 
         &--next {
             right: 0;
-            transform: translateX(-1.6rem);
+            transform: translate(-1.6rem, -50%);
         }
 
         &--previous {
             left: 0;
-            transform: translateX(1.6rem);
+            transform: translate(1.6rem, -50%);
         }
 
         @include respond-to('small') {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 4rem;
+            height: 4rem;
         }
     }
 

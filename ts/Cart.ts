@@ -9,8 +9,27 @@ interface CartItem {
 
 export class Cart {
     private items: CartItem[] = [];
+    private modalElement: HTMLElement;
+    private modalContentElement: HTMLElement;
 
-    constructor(private modalElement: HTMLElement, private btnElement: HTMLElement) {
+    constructor(private parentElement: HTMLElement, private btnElement: HTMLElement) {
+        this.renderModal();
+
+        this.modalContentElement = this.modalElement.querySelector('.cart-modal__content')!;
+
+        this.modalContentElement.addEventListener('click', e => {
+            const target = e.target as HTMLElement;
+            if (!e.target || !target.closest('button')) return;
+
+            const btn = target.closest('button') as HTMLInputElement;
+            const index = +btn.dataset.itemIndex!;
+
+            this.removeFromCart(index);
+        });
+
+        btnElement.addEventListener('click', () => {
+            this.modalElement.classList.toggle('cart-modal--show');
+        });
     }
 
     calcTotalAmount(): number {
@@ -42,11 +61,24 @@ export class Cart {
 
         if (totalAmount === 0) {
             cartAmountElement.classList.remove('cart-btn__amount--show');
-        }
-        else {
+        } else {
             cartAmountElement.textContent = totalAmount.toString();
             cartAmountElement.classList.add('cart-btn__amount--show');
         }
+    }
+
+    renderModal(): void {
+        this.modalElement = document.createElement('div');
+        this.modalElement.classList.add('cart-modal');
+        this.modalElement.innerHTML = `
+            <div class="cart-modal__title">
+                <p>Cart</p>
+            </div>
+            <div class="cart-modal__content">
+                <p>Your cart is empty</p>
+            </div>
+        `;
+        this.parentElement.append(this.modalElement);
     }
 
     renderCart(): void {
@@ -73,6 +105,6 @@ export class Cart {
                 <button class="btn">Checkout</button>
             `;
         }
-        this.modalElement.querySelector('.cart-modal__content')!.innerHTML = markup;
+        this.modalContentElement.innerHTML = markup;
     }
 }

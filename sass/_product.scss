@@ -33,6 +33,18 @@
         letter-spacing: 2px;
     }
 
+    &__price-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-bottom: 3.2rem;
+
+        @include respond-to('small') {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
     &__price {
         display: flex;
         gap: 2.3rem;
