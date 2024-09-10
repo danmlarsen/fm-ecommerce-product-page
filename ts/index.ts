@@ -11,13 +11,11 @@ addToCartBtnElement.addEventListener('click', () => {
     if (amount.getAmount() <= 0) return;
 
     const item = {
-        id: Math.floor(Date.now() * Math.random()),
+        id: Math.floor(Date.now() * Math.random()), // This ID is NOT truly random.
         productName: 'Test',
         price: 125,
         amount: amount.getAmount(),
     };
-
-    console.log(item);
 
     cart.addToCart(item);
 
