@@ -37,17 +37,45 @@ export class Cart {
     }
 
     addToCart(item: CartItem): void {
-        this.items.push(item);
+        const index = this.items.push(item) - 1;
+
+        if (this.items.length === 1) {
+            this.renderCart();
+        }
+
+        const itemMarkup = `
+            <li class="cart-modal__list-item fade-in" data-item-index="${index}">
+                <img class="cart-modal__item-img" src="${productImg}" alt="Sneakers" />
+                <div>
+                    <p class="cart-modal__item-name">Fall Limited Edition Sneakers</p>
+                    <p class="cart-modal__item-price">$${item.price} x ${item.amount} <span class="cart-modal__item-price--total">$${item.price * item.amount}</span></p>
+                </div>
+                <button class="cart-modal__remove-item-btn" data-item-index="${index}">
+                    <img src="${trashIcon}" alt="Trash bin" />
+                </button>
+            </li>
+        `;
+
+        this.modalContentElement.querySelector('.cart-modal__list')!.insertAdjacentHTML('beforeend', itemMarkup);
 
         this.renderAmount();
-        this.renderCart();
     }
 
     removeFromCart(removeIndex: number): void {
         this.items = this.items.filter((_, index) => index !== removeIndex);
 
+        const element = this.modalContentElement.querySelector(`[data-item-index="${removeIndex}"]`);
+
+        element?.classList.add('fade-out');
+        element?.addEventListener('animationend', () => {
+            if (this.items.length === 0) {
+                this.renderCart();
+            }
+
+            element?.remove();
+        });
+
         this.renderAmount();
-        this.renderCart();
     }
 
     getItems(): CartItem[] {
@@ -86,22 +114,8 @@ export class Cart {
         if (this.items.length === 0) {
             markup = `<p>Your cart is empty</p>`;
         } else {
-            const cartItemsMarkup = this.items.map((item, index) => {
-                return `
-                    <li class="cart-modal__list-item">
-                        <img class="cart-modal__item-img" src="${productImg}" alt="Sneakers" />
-                        <div>
-                            <p class="cart-modal__item-name">Fall Limited Edition Sneakers</p>
-                            <p class="cart-modal__item-price">$${item.price} x ${item.amount} <span class="cart-modal__item-price--total">$${item.price * item.amount}</span></p>
-                        </div>
-                        <button class="cart-modal__remove-item-btn" data-item-index="${index}">
-                            <img src="${trashIcon}" alt="Trash bin" />
-                        </button>
-                    </li>
-                `;
-            });
             markup = `
-                <ul class="cart-modal__list">${cartItemsMarkup.join('')}</ul>
+                <ul class="cart-modal__list"></ul>
                 <button class="btn">Checkout</button>
             `;
         }

@@ -70,17 +70,14 @@
     box-shadow: 0 2rem 5rem -2rem rgba($color-neutral-900, 0.5);
 
     @include respond-to('large') {
-        // position: absolute;
-        // width: 100%;
-        // max-width: 36rem;
-        top: 7.6rem;
-        right: 0;
-        transform: translateX(-50%);
+        transform: translate(32.5%, 3rem);
     }
 
     @include respond-to('small') {
+        position: fixed;
         top: 7.6rem;
         left: 50%;
+        right: auto;
         transform: translateX(-50%);
     }
 
