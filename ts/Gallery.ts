@@ -30,8 +30,11 @@ export class Gallery {
     selectedImageIndex: number = 0;
     interval: number;
 
+    largeImageContainerElement: HTMLElement;
+    carouselElement: HTMLElement;
     largeImageElement: HTMLImageElement;
     thumbsDivElement: HTMLElement;
+    lightbox: Gallery | null;
     backdrop: HTMLElement | null;
 
     constructor(private parentElement: Element, private isLightbox = false) {
@@ -46,6 +49,8 @@ export class Gallery {
             this.renderGallery();
         }
 
+        this.largeImageContainerElement = this.parentElement.querySelector('.gallery__large-images')!;
+        this.carouselElement = this.parentElement.querySelector('.gallery__carousel')!;
         this.largeImageElement = this.parentElement.querySelector('.gallery__large-img')!;
         this.thumbsDivElement = this.parentElement.querySelector('.gallery__thumbs')!;
 
@@ -53,25 +58,16 @@ export class Gallery {
         this.parentElement.querySelector('.gallery__btn--previous')!.addEventListener('click', this.previousImage.bind(this));
         this.parentElement.querySelector('.gallery__btn--next')!.addEventListener('click', this.nextImage.bind(this));
 
-        this.largeImageElement.addEventListener('click', () => {
-            if (window.innerWidth < SMALL_SCREEN_WIDTH) return;
+        this.largeImageContainerElement.addEventListener('click', () => {
+            if (isLightbox || window.innerWidth < SMALL_SCREEN_WIDTH) return;
 
-            new Gallery(document.body, true);
+            this.lightbox = new Gallery(document.body, true);
         });
-
-        // this.interval = setInterval(() => {
-        //     this.nextImage();
-        // }, 5000);
     }
 
     onClickThumbnail(e: Event): void {
         const target = e.target as HTMLImageElement;
         if (!target || !target.dataset.imageIndex) return;
-
-        // clearInterval(this.interval);
-        // this.interval = setInterval(() => {
-        //     this.nextImage();
-        // }, 5000);
 
         const index = +target.dataset.imageIndex;
         this.selectImage(index);
@@ -89,8 +85,10 @@ export class Gallery {
             }
         });
 
-        this.largeImageElement.src = this.images[index].imgPath;
+        // this.largeImageElement.src = this.images[index].imgPath;
         this.selectedImageIndex = index;
+
+        this.carouselElement.style.transform = `translateX(${-100 * index}%)`;
     }
 
     nextImage(): void {
@@ -109,7 +107,14 @@ export class Gallery {
         const markup = `
             <div class="gallery">
                 <figure class="gallery__large">
-                    <img src="${image1}" alt="Sneakers" class="gallery__large-img" />
+                    <div class="gallery__large-images">
+                        <div class="gallery__carousel">
+                            <img src="${image1}" alt="Sneakers" class="gallery__large-img" data-image-index="0" />
+                            <img src="${image2}" alt="Sneakers" class="gallery__large-img" data-image-index="1" />
+                            <img src="${image3}" alt="Sneakers" class="gallery__large-img" data-image-index="2" />
+                            <img src="${image4}" alt="Sneakers" class="gallery__large-img" data-image-index="3" />
+                        </div>
+                    </div>
 
                     <button class="gallery__btn gallery__btn--previous">
                         <img src="${prevIcon}" alt="Left arrow icon">
@@ -148,7 +153,14 @@ export class Gallery {
                     <img src="${closeIcon}" alt="Close icon" class="gallery__close-icon" />
                 </button>
                 <figure class="gallery__large">
-                    <img src="${image1}" alt="Sneakers" class="gallery__large-img" />
+                    <div class="gallery__large-images">
+                        <div class="gallery__carousel">
+                            <img src="${image1}" alt="Sneakers" class="gallery__large-img" data-image-index="0" />
+                            <img src="${image2}" alt="Sneakers" class="gallery__large-img" data-image-index="1" />
+                            <img src="${image3}" alt="Sneakers" class="gallery__large-img" data-image-index="2" />
+                            <img src="${image4}" alt="Sneakers" class="gallery__large-img" data-image-index="3" />
+                        </div>
+                    </div>
                     <button class="gallery__btn gallery__btn--previous">
                         <img src="${prevIcon}" alt="Left arrow icon">
                     </button>

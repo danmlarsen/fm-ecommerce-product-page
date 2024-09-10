@@ -1,0 +1,141 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.cart-btn {
+    width: 2.182rem;
+    height: 2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+
+    &__wrapper {
+        position: relative;
+        width: 2.182rem;
+        height: 2rem;
+    }
+
+    &__amount {
+        width: 1.9rem;
+        height: 1.3rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: $fw-bold;
+        background-color: $color-primary-500;
+        color: $color-neutral-100;
+        border-radius: 0.65rem;
+
+        visibility: hidden;
+        opacity: 0;
+
+        &--show {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+.cart-icon {
+    width: 2.2rem;
+    height: 2rem;
+    fill: $color-neutral-950;
+}
+
+.cart-modal {
+    display: grid;
+    grid-template-rows: min-content auto;
+    visibility: hidden;
+    opacity: 0;
+
+    transition: all 0.2s ease-in-out;
+
+    width: 36rem;
+    min-height: 25.6rem;
+    padding: 2.4rem 0;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    transform: translate(50%, 3rem);
+
+    background-color: $color-neutral-100;
+    border-radius: 1rem;
+    box-shadow: 0 2rem 5rem -2rem rgba($color-neutral-900, 0.5);
+
+    @include respond-to('large') {
+        // position: absolute;
+        // width: 100%;
+        // max-width: 36rem;
+        top: 7.6rem;
+        right: 0;
+        transform: translateX(-50%);
+    }
+
+    @include respond-to('small') {
+        top: 7.6rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &--show {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &__title {
+        color: $color-neutral-900;
+        font-weight: $fw-bold;
+        padding: 0 2.4rem;
+        padding-bottom: 2.7rem;
+        border-bottom: 1px solid $color-neutral-400;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 2.4rem;
+    }
+
+    &__list {
+        margin: 2.4rem 0;
+    }
+
+    &__list-item {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__item-img {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    &__item-price {
+        &--total {
+            font-weight: $fw-bold;
+            color: $color-neutral-950;
+        }
+    }
+
+    &__remove-item-btn {
+        width: 1.4rem;
+        height: 1.6rem;
+        border: 0;
+        background: none;
+        cursor: pointer;
+    }
+}

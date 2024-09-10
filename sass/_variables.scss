@@ -23,6 +23,9 @@ $fw-regular: 400;
 $fw-bold: 700;
 
 $breakpoints: (
+    'large': (
+        max-width: 80em,
+    ),
     'medium': (
         max-width: 64em,
     ),

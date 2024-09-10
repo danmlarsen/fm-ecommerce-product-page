@@ -3,7 +3,6 @@
 
 .gallery {
     display: grid;
-    row-gap: 3.2rem;
 
     &--lightbox {
         position: fixed;
@@ -11,10 +10,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 100;
-
-        .gallery__large {
-            overflow: visible;
-        }
 
         .gallery__btn {
             display: flex;
@@ -29,18 +24,31 @@
     }
 
     &__large {
-        // max-width: 44.5rem;
         max-width: 55rem;
-        // height: 44.5rem;
-        border-radius: 1.5rem;
-        overflow: hidden;
+        max-height: 55rem;
         position: relative;
+        margin-bottom: 4rem;
+    }
+
+    &__large-images {
+        overflow: hidden;
+        border-radius: 1.5rem;
         cursor: pointer;
+        display: flex;
+        height: 100%;
 
         @include respond-to('small') {
             border-radius: 0;
             cursor: auto;
         }
+    }
+
+    &__large-img {
+    }
+
+    &__carousel {
+        display: flex;
+        transition: all 0.5s ease-in-out;
     }
 
     &__thumbs {
@@ -60,17 +68,28 @@
         border-radius: 1rem;
         overflow: hidden;
         cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease-in-out;
+
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all 0.2s ease-in-out;
+            pointer-events: none;
+        }
+
+        &:hover::before {
+            background-color: rgba($color-neutral-100, 0.5);
+        }
 
         &--selected {
-            position: relative;
             outline: 3px solid $color-primary-500;
 
-            &::before {
-                content: '';
-                display: block;
-                position: absolute;
-                width: 100%;
-                height: 100%;
+            &::before,
+            &:hover::before {
                 background-color: rgba($color-neutral-100, 0.75);
             }
         }
@@ -115,6 +134,7 @@
         background: none;
         border: none;
         cursor: pointer;
+        margin-bottom: 2.4rem;
     }
 
     &__close-icon {
