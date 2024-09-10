@@ -54,7 +54,7 @@
     visibility: hidden;
     opacity: 0;
 
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, height 0.5s ease-in-out;
 
     width: 36rem;
     min-height: 25.6rem;
@@ -104,6 +104,7 @@
 
     &__list {
         margin: 2.4rem 0;
+        transition: all 0.5s ease-in-out;
     }
 
     &__list-item {

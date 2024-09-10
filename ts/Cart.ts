@@ -2,6 +2,7 @@ import productImg from 'url:../assets/images/image-product-1-thumbnail.jpg';
 import trashIcon from 'url:../assets/images/icon-delete.svg';
 
 interface CartItem {
+    id: number;
     productName: string;
     price: number;
     amount: number;
@@ -21,8 +22,8 @@ export class Cart {
             const target = e.target as HTMLElement;
             if (!e.target || !target.closest('button')) return;
 
-            const btn = target.closest('button') as HTMLInputElement;
-            const index = +btn.dataset.itemIndex!;
+            const listItemElement = target.closest('.cart-modal__list-item') as HTMLInputElement;
+            const index = +listItemElement.dataset.itemIndex!;
 
             this.removeFromCart(index);
         });
@@ -37,34 +38,38 @@ export class Cart {
     }
 
     addToCart(item: CartItem): void {
-        const index = this.items.push(item) - 1;
+        this.items.push(item);
 
         if (this.items.length === 1) {
             this.renderCart();
         }
 
         const itemMarkup = `
-            <li class="cart-modal__list-item fade-in" data-item-index="${index}">
-                <img class="cart-modal__item-img" src="${productImg}" alt="Sneakers" />
-                <div>
-                    <p class="cart-modal__item-name">Fall Limited Edition Sneakers</p>
-                    <p class="cart-modal__item-price">$${item.price} x ${item.amount} <span class="cart-modal__item-price--total">$${item.price * item.amount}</span></p>
-                </div>
-                <button class="cart-modal__remove-item-btn" data-item-index="${index}">
-                    <img src="${trashIcon}" alt="Trash bin" />
-                </button>
-            </li>
+            <img class="cart-modal__item-img" src="${productImg}" alt="Sneakers" />
+            <div>
+                <p class="cart-modal__item-name">Fall Limited Edition Sneakers</p>
+                <p class="cart-modal__item-price">$${item.price} x ${item.amount} <span class="cart-modal__item-price--total">$${item.price * item.amount}</span></p>
+            </div>
+            <button class="cart-modal__remove-item-btn">
+                <img src="${trashIcon}" alt="Trash bin" />
+            </button>
         `;
 
-        this.modalContentElement.querySelector('.cart-modal__list')!.insertAdjacentHTML('beforeend', itemMarkup);
+        const itemElement = document.createElement('li');
+        itemElement.innerHTML = itemMarkup;
+        itemElement.dataset.itemIndex = item.id.toString();
+        itemElement.classList.add('cart-modal__list-item');
+        itemElement.classList.add('fade-in');
+        itemElement.addEventListener('animationend', () => itemElement.classList.remove('fade-in'));
+        this.modalContentElement.querySelector('.cart-modal__list')!.append(itemElement);
 
         this.renderAmount();
     }
 
-    removeFromCart(removeIndex: number): void {
-        this.items = this.items.filter((_, index) => index !== removeIndex);
+    removeFromCart(removeId: number): void {
+        this.items = this.items.filter(item => item.id !== removeId);
 
-        const element = this.modalContentElement.querySelector(`[data-item-index="${removeIndex}"]`);
+        const element = this.modalContentElement.querySelector(`[data-item-index="${removeId}"]`);
 
         element?.classList.add('fade-out');
         element?.addEventListener('animationend', () => {
@@ -116,7 +121,7 @@ export class Cart {
         } else {
             markup = `
                 <ul class="cart-modal__list"></ul>
-                <button class="btn">Checkout</button>
+                <button class="btn fade-in">Checkout</button>
             `;
         }
         this.modalContentElement.innerHTML = markup;
