@@ -109,10 +109,10 @@ export class Gallery {
                 <figure class="gallery__large">
                     <div class="gallery__large-images">
                         <div class="gallery__carousel">
-                            <img src="${image1}" alt="Sneakers" class="gallery__large-img" data-image-index="0" />
-                            <img src="${image2}" alt="Sneakers" class="gallery__large-img" data-image-index="1" />
-                            <img src="${image3}" alt="Sneakers" class="gallery__large-img" data-image-index="2" />
-                            <img src="${image4}" alt="Sneakers" class="gallery__large-img" data-image-index="3" />
+                            <img src="${thumb1}" alt="Sneakers" class="gallery__large-img gallery__large-img-loading" data-image-index="0" data-image-src="${image1}" />
+                            <img src="${thumb2}" alt="Sneakers" class="gallery__large-img gallery__large-img-loading" data-image-index="1" data-image-src="${image2}" />
+                            <img src="${thumb3}" alt="Sneakers" class="gallery__large-img gallery__large-img-loading" data-image-index="2" data-image-src="${image3}" />
+                            <img src="${thumb4}" alt="Sneakers" class="gallery__large-img gallery__large-img-loading" data-image-index="3" data-image-src="${image4}" />
                         </div>
                     </div>
 
@@ -138,6 +138,16 @@ export class Gallery {
         `;
 
         this.parentElement.innerHTML = markup;
+
+        this.parentElement.querySelectorAll('.gallery__large-img').forEach(element => {
+            const imgElement = element as HTMLImageElement;
+            const img = new Image();
+            img.src = imgElement.dataset.imageSrc!;
+            img.onload = () => {
+                imgElement.src = imgElement.dataset.imageSrc!;
+                imgElement.classList.remove('gallery__large-img-loading');
+            };
+        });
     }
 
     renderLightbox(): void {

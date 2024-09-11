@@ -24,17 +24,21 @@
     }
 
     &__large {
+        min-height: 44.5rem;
         max-width: 55rem;
         max-height: 55rem;
         position: relative;
         margin-bottom: 4rem;
+
+        @include respond-to('small') {
+            min-height: auto;
+        }
     }
 
     &__large-images {
         overflow: hidden;
         border-radius: 1.5rem;
         cursor: pointer;
-        display: flex;
         height: 100%;
 
         @include respond-to('small') {
@@ -43,12 +47,20 @@
         }
     }
 
-    &__large-img {
-    }
-
     &__carousel {
         display: flex;
         transition: all 0.5s ease-in-out;
+    }
+
+    &__large-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &__large-img-loading {
+        filter: blur(5px);
     }
 
     &__thumbs {

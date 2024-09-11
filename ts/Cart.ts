@@ -18,19 +18,20 @@ export class Cart {
 
         this.modalContentElement = this.modalElement.querySelector('.cart-modal__content')!;
 
-        this.modalContentElement.addEventListener('click', e => {
-            const target = e.target as HTMLElement;
-            if (!e.target || !target.closest('button')) return;
-
-            const listItemElement = target.closest('.cart-modal__list-item') as HTMLInputElement;
-            const index = +listItemElement.dataset.itemIndex!;
-
-            this.removeFromCart(index);
-        });
+        this.modalContentElement.addEventListener('click', this.onClickRemove.bind(this));
 
         btnElement.addEventListener('click', () => {
             this.modalElement.classList.toggle('cart-modal--show');
         });
+    }
+
+    static createItem(amount: number = 1): CartItem {
+        return {
+            id: Math.floor(Date.now() * Math.random()), // This ID is NOT truly random.
+            productName: 'Fall Limited Edition Sneakers',
+            price: 125,
+            amount,
+        };
     }
 
     calcTotalAmount(): number {
@@ -85,6 +86,16 @@ export class Cart {
 
     getItems(): CartItem[] {
         return this.items;
+    }
+
+    onClickRemove(e: Event): void {
+        const target = e.target as HTMLElement;
+        if (!e.target || !target.closest('button')) return;
+
+        const listItemElement = target.closest('.cart-modal__list-item') as HTMLInputElement;
+        const index = +listItemElement.dataset.itemIndex!;
+
+        this.removeFromCart(index);
     }
 
     renderAmount(): void {
