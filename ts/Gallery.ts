@@ -125,9 +125,7 @@ export class Gallery {
                 </figure>
                 <div class="gallery__thumbs">
 
-                    <figure class="gallery__thumbnail gallery__thumbnail--selected">
-                        <img src="${thumb1}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="0" />
-                    </figure>
+                    <figure class="gallery__thumbnail gallery__thumbnail--selected"><img src="${thumb1}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="0" /></figure>
                     <figure class="gallery__thumbnail"><img src="${thumb2}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="1" /></figure>
                     <figure class="gallery__thumbnail"><img src="${thumb3}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="2" /></figure>
                     <figure class="gallery__thumbnail"><img src="${thumb4}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="3" /></figure>
@@ -179,9 +177,7 @@ export class Gallery {
                     </button>
                 </figure>
                 <div class="gallery__thumbs">
-                    <figure class="gallery__thumbnail gallery__thumbnail--selected">
-                        <img src="${thumb1}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="0" />
-                    </figure>
+                    <figure class="gallery__thumbnail gallery__thumbnail--selected"><img src="${thumb1}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="0" /></figure>
                     <figure class="gallery__thumbnail"><img src="${thumb2}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="1" /></figure>
                     <figure class="gallery__thumbnail"><img src="${thumb3}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="2" /></figure>
                     <figure class="gallery__thumbnail"><img src="${thumb4}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="3" /></figure>

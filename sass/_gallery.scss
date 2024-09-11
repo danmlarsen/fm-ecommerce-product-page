@@ -24,15 +24,10 @@
     }
 
     &__large {
-        min-height: 44.5rem;
         max-width: 55rem;
         max-height: 55rem;
         position: relative;
         margin-bottom: 4rem;
-
-        @include respond-to('small') {
-            min-height: auto;
-        }
     }
 
     &__large-images {
@@ -53,10 +48,13 @@
     }
 
     &__large-img {
-        height: 100%;
-        width: 100%;
+        min-height: 44.5rem;
         object-fit: cover;
         transition: all 0.3s ease-in-out;
+
+        @include respond-to('small') {
+            min-height: 30rem;
+        }
     }
 
     &__large-img-loading {
