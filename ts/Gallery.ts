@@ -117,10 +117,10 @@ export class Gallery {
                     </div>
 
                     <button class="gallery__btn gallery__btn--previous">
-                        <img src="${prevIcon}" alt="Left arrow icon">
+                        <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
                     </button>
                     <button class="gallery__btn gallery__btn--next">
-                        <img src="${nextIcon}" alt="Right arrow icon">
+                        <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
                     </button>
                 </figure>
                 <div class="gallery__thumbs">
@@ -158,7 +158,7 @@ export class Gallery {
         this.parentElement.classList.add('gallery--lightbox');
         this.parentElement.innerHTML = `
                 <button class="gallery__close-btn">
-                    <img src="${closeIcon}" alt="Close icon" class="gallery__close-icon" />
+                    <svg alt="Close icon" class="gallery__close-icon" xmlns="http://www.w3.org/2000/svg"><path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z" fill-rule="evenodd"/></svg>
                 </button>
                 <figure class="gallery__large">
                     <div class="gallery__large-images">
@@ -170,10 +170,10 @@ export class Gallery {
                         </div>
                     </div>
                     <button class="gallery__btn gallery__btn--previous">
-                        <img src="${prevIcon}" alt="Left arrow icon">
+                        <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
                     </button>
                     <button class="gallery__btn gallery__btn--next">
-                        <img src="${nextIcon}" alt="Right arrow icon">
+                        <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
                     </button>
                 </figure>
                 <div class="gallery__thumbs">

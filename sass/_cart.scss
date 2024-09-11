@@ -9,6 +9,15 @@
     cursor: pointer;
     position: relative;
 
+    &:hover &__icon {
+        fill: $color-neutral-900;
+    }
+
+    &__icon {
+        fill: $color-neutral-700;
+        transition: all .2s ease-in-out;
+    }
+
     &__wrapper {
         position: relative;
         width: 2.182rem;
@@ -45,7 +54,6 @@
 .cart-icon {
     width: 2.2rem;
     height: 2rem;
-    fill: $color-neutral-950;
 }
 
 .cart-modal {
@@ -135,5 +143,11 @@
         border: 0;
         background: none;
         cursor: pointer;
+        fill: $color-neutral-700;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            fill: $color-neutral-900;
+        }
     }
 }

@@ -20,6 +20,7 @@
             &--next {
                 transform: translate(50%, -50%);
             }
+
         }
     }
 
@@ -119,6 +120,13 @@
         position: absolute;
         top: 50%;
 
+        stroke: $color-neutral-900;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            stroke: $color-primary-500;
+        }
+
         &--next {
             right: 0;
             transform: translate(-1.6rem, -50%);
@@ -145,6 +153,12 @@
         border: none;
         cursor: pointer;
         margin-bottom: 2.4rem;
+        fill: $color-neutral-700;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            fill: $color-primary-500;
+        }
     }
 
     &__close-icon {
