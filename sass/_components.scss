@@ -10,10 +10,10 @@
     width: 5rem;
     height: 5rem;
     margin-left: 4.618rem;
+    transition: all .2s ease-in-out;
 
     &:hover,
-    &:active,
-    &:focus {
+    &:active {
         box-shadow: 0 0 0 2px $color-primary-500;
     }
 

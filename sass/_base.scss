@@ -15,6 +15,11 @@ h6 {
     color: $color-neutral-900;
 }
 
+:focus-visible {
+    outline-color: $color-primary-500;
+    outline-offset: 5px;
+}
+
 .header {
     max-width: 115.8rem;
     min-height: 8.4rem;

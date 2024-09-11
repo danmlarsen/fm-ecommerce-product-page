@@ -1,5 +1,4 @@
 import productImg from 'url:../assets/images/image-product-1-thumbnail.jpg';
-import trashIcon from 'url:../assets/images/icon-delete.svg';
 
 interface CartItem {
     id: number;
@@ -22,6 +21,15 @@ export class Cart {
 
         btnElement.addEventListener('click', () => {
             this.modalElement.classList.toggle('cart-modal--show');
+        });
+
+        window.addEventListener('click', e => {
+            const targetElement = e.target as HTMLElement;
+            if (targetElement.closest('.cart-btn')) return;
+
+            if (!targetElement.closest('.cart-modal--show') && this.modalElement.classList.contains('cart-modal--show')) {
+                this.modalElement.classList.remove('cart-modal--show');
+            }         
         });
     }
 

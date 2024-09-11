@@ -97,7 +97,7 @@
         }
 
         &--selected {
-            outline: 3px solid $color-primary-500;
+            box-shadow: 0 0 0 3px $color-primary-500;
 
             &::before,
             &:hover::before {
