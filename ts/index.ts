@@ -14,7 +14,7 @@ document.querySelector('.btn--add-to-cart')!.addEventListener('click', () => {
     amount.reset();
 });
 
-const gallery = new Gallery(document.querySelector('.product__gallery')!);
+Gallery.create(document.querySelector('.product__gallery')!);
 
 let backdrop: Backdrop;
 

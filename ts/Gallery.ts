@@ -18,22 +18,22 @@ interface imageItem {
 }
 
 export class Gallery {
-    images: imageItem[] = [
+    private images: imageItem[] = [
         { imgPath: image1, thumbPath: thumb1, alt: 'Sneakers' },
         { imgPath: image2, thumbPath: thumb2, alt: 'Sneakers' },
         { imgPath: image3, thumbPath: thumb3, alt: 'Sneakers' },
         { imgPath: image4, thumbPath: thumb4, alt: 'Sneakers' },
     ];
+    private selectedImageIndex: number = 0;
+    private galleryElement: HTMLElement;
+    private largeImageContainerElement: HTMLElement;
+    private carouselElement: HTMLElement;
+    private thumbsDivElement: HTMLElement;
+    private backdrop: Backdrop | null;
 
-    selectedImageIndex: number = 0;
-    interval: number;
-
-    galleryElement: HTMLElement;
-    largeImageContainerElement: HTMLElement;
-    carouselElement: HTMLElement;
-    largeImageElement: HTMLImageElement;
-    thumbsDivElement: HTMLElement;
-    backdrop: Backdrop | null;
+    static create(parentElement: Element): Gallery {
+        return new Gallery(parentElement);
+    }
 
     constructor(private parentElement: Element, private isLightbox = false) {
         this.render();
@@ -44,7 +44,6 @@ export class Gallery {
 
         this.largeImageContainerElement = this.galleryElement.querySelector('.gallery__large-images')!;
         this.carouselElement = this.galleryElement.querySelector('.gallery__carousel')!;
-        this.largeImageElement = this.galleryElement.querySelector('.gallery__large-img')!;
         this.thumbsDivElement = this.galleryElement.querySelector('.gallery__thumbs')!;
 
         this.thumbsDivElement.addEventListener('click', this.onClickThumbnail.bind(this));
@@ -56,14 +55,6 @@ export class Gallery {
 
             new Gallery(document.body, true);
         });
-    }
-
-    onClickThumbnail(e: Event): void {
-        const target = e.target as HTMLImageElement;
-        if (!target || !target.dataset.imageIndex) return;
-
-        const index = +target.dataset.imageIndex;
-        this.selectImage(index);
     }
 
     selectImage(index: number): void {
@@ -85,13 +76,11 @@ export class Gallery {
 
     nextImage(): void {
         const newIndex = this.selectedImageIndex < this.images.length - 1 ? this.selectedImageIndex + 1 : 0;
-
         this.selectImage(newIndex);
     }
 
     previousImage(): void {
         const newIndex = this.selectedImageIndex === 0 ? this.images.length - 1 : this.selectedImageIndex - 1;
-
         this.selectImage(newIndex);
     }
 
@@ -107,7 +96,15 @@ export class Gallery {
         });
     }
 
-    render(): void {
+    private onClickThumbnail(e: Event): void {
+        const target = e.target as HTMLImageElement;
+        if (!target || !target.dataset.imageIndex) return;
+
+        const index = +target.dataset.imageIndex;
+        this.selectImage(index);
+    }
+
+    private render(): void {
         this.galleryElement = document.createElement('div');
         this.galleryElement.classList.add('gallery');
 

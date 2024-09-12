@@ -1,33 +1,45 @@
 export class Amount {
+    maxValue = 9;
+    minValue = 0;
+    private value = 0;
     private inputElement: HTMLInputElement;
 
     constructor(private parentElement: Element) {
         this.inputElement = parentElement.querySelector('.amount__input')!;
+
+        if (this.inputElement.max) {
+            this.maxValue = +this.inputElement.max;
+        }
+        if (this.inputElement.min) {
+            this.minValue = +this.inputElement.min;
+        }
+
         parentElement.querySelector('.amount__btn--increment')!.addEventListener('click', this.onIncrement.bind(this));
         parentElement.querySelector('.amount__btn--decrement')!.addEventListener('click', this.onDecrement.bind(this));
     }
 
     getAmount(): number {
-        return +this.inputElement.value;
+        return this.value;
     }
 
     reset(): void {
-        this.inputElement.value = '0';
+        this.value = 0;
+        this.updateElement();
     }
 
-    onIncrement(): void {
-        if (+this.inputElement.value >= +this.inputElement.max) return;
-
-        const newNumber = +this.inputElement.value + 1;
-
-        this.inputElement.value = newNumber.toString();
+    private updateElement(): void {
+        this.inputElement.value = this.value.toString();
     }
 
-    onDecrement(): void {
-        if (+this.inputElement.value <= +this.inputElement.min) return;
+    private onIncrement(): void {
+        if (this.value >= this.maxValue) return;
+        this.value++;
+        this.updateElement();
+    }
 
-        const newNumber = +this.inputElement.value - 1;
-
-        this.inputElement.value = newNumber.toString();
+    private onDecrement(): void {
+        if (+this.value <= this.minValue) return;
+        this.value--;
+        this.updateElement();
     }
 }

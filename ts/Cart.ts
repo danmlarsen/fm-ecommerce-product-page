@@ -16,7 +16,6 @@ export class Cart {
         this.renderModal();
 
         this.modalContentElement = this.modalElement.querySelector('.cart-modal__content')!;
-
         this.modalContentElement.addEventListener('click', this.onClickRemove.bind(this));
 
         btnElement.addEventListener('click', () => {
@@ -66,7 +65,7 @@ export class Cart {
 
         const itemElement = document.createElement('li');
         itemElement.innerHTML = itemMarkup;
-        itemElement.dataset.itemIndex = item.id.toString();
+        itemElement.dataset.itemId = item.id.toString();
         itemElement.classList.add('cart-modal__list-item');
         itemElement.classList.add('fade-in');
         itemElement.addEventListener('animationend', () => itemElement.classList.remove('fade-in'));
@@ -78,15 +77,15 @@ export class Cart {
     removeFromCart(removeId: number): void {
         this.items = this.items.filter(item => item.id !== removeId);
 
-        const element = this.modalContentElement.querySelector(`[data-item-index="${removeId}"]`);
+        const removeElement = this.modalContentElement.querySelector(`[data-item-id="${removeId}"]`);
 
-        element?.classList.add('fade-out');
-        element?.addEventListener('animationend', () => {
+        removeElement?.classList.add('fade-out');
+        removeElement?.addEventListener('animationend', () => {
             if (this.items.length === 0) {
                 this.renderCart();
             }
 
-            element?.remove();
+            removeElement?.remove();
         });
 
         this.renderAmount();
@@ -101,9 +100,9 @@ export class Cart {
         if (!e.target || !target.closest('button')) return;
 
         const listItemElement = target.closest('.cart-modal__list-item') as HTMLInputElement;
-        const index = +listItemElement.dataset.itemIndex!;
+        const itemId = +listItemElement.dataset.itemId!;
 
-        this.removeFromCart(index);
+        this.removeFromCart(itemId);
     }
 
     renderAmount(): void {
