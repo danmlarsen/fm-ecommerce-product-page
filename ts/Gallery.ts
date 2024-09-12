@@ -98,16 +98,15 @@ export class Gallery {
     }
 
     private onClickThumbnail(e: Event): void {
-
         if (e.type === 'keydown') {
             const keydownEvent = e as KeyboardEvent;
             if (keydownEvent.code !== 'Space' && keydownEvent.code !== 'Enter') return;
         }
-        
+
         const target = e.target as Element;
         if (!target) return;
 
-        const imageElement = target.querySelector('.gallery__thumbnail-img') as HTMLImageElement || target;
+        const imageElement = (target.querySelector('.gallery__thumbnail-img') as HTMLImageElement) || target;
         if (!imageElement || !imageElement.dataset.imageIndex) return;
 
         const imageIndex = +imageElement.dataset.imageIndex;
@@ -127,7 +126,7 @@ export class Gallery {
             this.galleryElement.insertAdjacentHTML(
                 'beforeend',
                 `
-                <button class="gallery__close-btn">
+                <button class="gallery__close-btn" aria-label="Close lightbox button">
                     <svg alt="Close icon" class="gallery__close-icon" xmlns="http://www.w3.org/2000/svg"><path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z" fill-rule="evenodd"/></svg>
                 </button>`
             );
@@ -137,27 +136,24 @@ export class Gallery {
             <figure class="gallery__large">
                 <div class="gallery__large-images">
                     <div class="gallery__carousel">
-                        <img src="${thumb1}" alt="Sneakers" class="gallery__large-img gallery__large-img-loading" data-image-index="0" data-image-src="${image1}" />
-                        <img src="${thumb2}" alt="Sneakers" class="gallery__large-img gallery__large-img-loading" data-image-index="1" data-image-src="${image2}" />
-                        <img src="${thumb3}" alt="Sneakers" class="gallery__large-img gallery__large-img-loading" data-image-index="2" data-image-src="${image3}" />
-                        <img src="${thumb4}" alt="Sneakers" class="gallery__large-img gallery__large-img-loading" data-image-index="3" data-image-src="${image4}" />
+                        <img src="${thumb1}" alt="Sneakers image 1" class="gallery__large-img gallery__large-img-loading" data-image-index="0" data-image-src="${image1}" />
+                        <img src="${thumb2}" alt="Sneakers image 2" class="gallery__large-img gallery__large-img-loading" data-image-index="1" data-image-src="${image2}" />
+                        <img src="${thumb3}" alt="Sneakers image 3" class="gallery__large-img gallery__large-img-loading" data-image-index="2" data-image-src="${image3}" />
+                        <img src="${thumb4}" alt="Sneakers image 4" class="gallery__large-img gallery__large-img-loading" data-image-index="3" data-image-src="${image4}" />
                     </div>
                 </div>
-
-                <button class="gallery__btn gallery__btn--previous">
+                <button class="gallery__btn gallery__btn--previous" aria-label="Previous image button">
                     <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
                 </button>
-                <button class="gallery__btn gallery__btn--next">
+                <button class="gallery__btn gallery__btn--next" aria-label="Next image button">
                     <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
                 </button>
             </figure>
             <div class="gallery__thumbs">
-
-                <figure tabindex="0" class="gallery__thumbnail gallery__thumbnail--selected"><img src="${thumb1}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="0" /></figure>
-                <figure tabindex="0" class="gallery__thumbnail"><img src="${thumb2}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="1" /></figure>
-                <figure tabindex="0" class="gallery__thumbnail"><img src="${thumb3}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="2" /></figure>
-                <figure tabindex="0" class="gallery__thumbnail"><img src="${thumb4}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="3" /></figure>
-
+                <figure tabindex="0" class="gallery__thumbnail gallery__thumbnail--selected"><img src="${thumb1}" alt="Sneakers thumbnail 1" class="gallery__thumbnail-img" data-image-index="0" /></figure>
+                <figure tabindex="0" class="gallery__thumbnail"><img src="${thumb2}" alt="Sneakers thumbnail 2" class="gallery__thumbnail-img" data-image-index="1" /></figure>
+                <figure tabindex="0" class="gallery__thumbnail"><img src="${thumb3}" alt="Sneakers thumbnail 3" class="gallery__thumbnail-img" data-image-index="2" /></figure>
+                <figure tabindex="0" class="gallery__thumbnail"><img src="${thumb4}" alt="Sneakers thumbnail 4" class="gallery__thumbnail-img" data-image-index="3" /></figure>
             </div>`;
 
         this.galleryElement.insertAdjacentHTML('beforeend', markup);

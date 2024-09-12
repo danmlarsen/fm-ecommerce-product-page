@@ -169,6 +169,8 @@ h6 {
 
 .nav-btn {
     display: none;
+    border: none;
+    background: none;
     cursor: pointer;
 
     @include respond-to('small') {
