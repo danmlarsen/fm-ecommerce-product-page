@@ -10,7 +10,7 @@
     width: 5rem;
     height: 5rem;
     margin-left: 4.618rem;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     &:hover,
     &:active {
@@ -65,6 +65,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba($color-neutral-950, 0.85);
+    background-color: rgba($color-neutral-950, 0.75);
     z-index: 100;
 }

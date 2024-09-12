@@ -1,4 +1,5 @@
 import { Amount } from './Amount';
+import { Backdrop } from './Backdrop';
 import { Cart } from './Cart';
 import { Gallery } from './Gallery';
 
@@ -14,3 +15,9 @@ document.querySelector('.btn--add-to-cart')!.addEventListener('click', () => {
 });
 
 const gallery = new Gallery(document.querySelector('.product__gallery')!);
+
+document.querySelector('.nav-btn')?.addEventListener('click', () => {
+    document.querySelector('.navigation')?.classList.toggle('navigation--show');
+
+    Backdrop.create(() => document.querySelector('.navigation')?.classList.remove('navigation--show'));
+});

@@ -20,15 +20,21 @@
             &--next {
                 transform: translate(50%, -50%);
             }
-
         }
     }
 
     &__large {
         max-width: 55rem;
         max-height: 55rem;
+        min-height: 44.5rem;
         position: relative;
-        margin-bottom: 4rem;
+        margin-bottom: 3.2rem;
+
+        @include respond-to('small') {
+            min-height: auto;
+            height: 30rem;
+            margin-bottom: 0;
+        }
     }
 
     &__large-images {
@@ -46,16 +52,13 @@
     &__carousel {
         display: flex;
         transition: all 0.5s ease-in-out;
+        height: 100%;
     }
 
     &__large-img {
-        min-height: 44.5rem;
+        min-width: 100%;
         object-fit: cover;
         transition: all 0.3s ease-in-out;
-
-        @include respond-to('small') {
-            min-height: 30rem;
-        }
     }
 
     &__large-img-loading {
@@ -121,7 +124,7 @@
         top: 50%;
 
         stroke: $color-neutral-900;
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
 
         &:hover {
             stroke: $color-primary-500;
@@ -154,7 +157,7 @@
         cursor: pointer;
         margin-bottom: 2.4rem;
         fill: $color-neutral-700;
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
 
         &:hover {
             fill: $color-primary-500;

@@ -12,17 +12,14 @@
         gap: 2.4rem;
     }
 
-    &__gallery {
-    }
-
     &__content {
-        align-self: center;
         min-height: 42.6rem;
         max-width: 44.5rem;
-        margin-bottom: 2rem;
+        margin-top: 6rem;
 
         @include respond-to('small') {
             padding: 0 2.4rem;
+            margin-top: 0;
         }
     }
 

@@ -1,3 +1,5 @@
+import { Backdrop } from './Backdrop';
+
 import image1 from '../assets/images/image-product-1.jpg';
 import image2 from '../assets/images/image-product-2.jpg';
 import image3 from '../assets/images/image-product-3.jpg';
@@ -31,7 +33,7 @@ export class Gallery {
     carouselElement: HTMLElement;
     largeImageElement: HTMLImageElement;
     thumbsDivElement: HTMLElement;
-    backdrop: HTMLElement | null;
+    backdrop: Backdrop | null;
 
     constructor(private parentElement: Element, private isLightbox = false) {
         this.render();
@@ -94,10 +96,13 @@ export class Gallery {
     }
 
     remove(): void {
+        if (this.backdrop) {
+            this.backdrop.remove(false);
+            this.backdrop = null;
+        }
+
         this.galleryElement.classList.add('fade-out');
-        this.backdrop?.classList.add('fade-out');
         this.galleryElement.addEventListener('animationend', () => {
-            this.backdrop?.remove();
             this.galleryElement.remove();
         });
     }
@@ -107,19 +112,18 @@ export class Gallery {
         this.galleryElement.classList.add('gallery');
 
         if (this.isLightbox) {
-            this.backdrop = document.createElement('div');
-            this.backdrop.classList.add('backdrop');
-            this.backdrop.classList.add('fade-in');
-            document.body.append(this.backdrop);
-            this.backdrop.addEventListener('click', () => this.remove());
-            
+            this.backdrop = Backdrop.create(() => this.remove());
+
             this.galleryElement.classList.add('gallery--lightbox');
             this.galleryElement.classList.add('fade-in');
 
-            this.galleryElement.insertAdjacentHTML('beforeend', `
+            this.galleryElement.insertAdjacentHTML(
+                'beforeend',
+                `
                 <button class="gallery__close-btn">
                     <svg alt="Close icon" class="gallery__close-icon" xmlns="http://www.w3.org/2000/svg"><path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z" fill-rule="evenodd"/></svg>
-                </button>`);
+                </button>`
+            );
         }
 
         const markup = `
@@ -147,7 +151,7 @@ export class Gallery {
                 <figure class="gallery__thumbnail"><img src="${thumb3}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="2" /></figure>
                 <figure class="gallery__thumbnail"><img src="${thumb4}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="3" /></figure>
 
-            </div>`; 
+            </div>`;
 
         this.galleryElement.insertAdjacentHTML('beforeend', markup);
 
@@ -163,8 +167,7 @@ export class Gallery {
 
         if (this.isLightbox) {
             document.body.append(this.galleryElement);
-        }
-        else {
+        } else {
             this.parentElement.append(this.galleryElement);
         }
     }
