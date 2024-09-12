@@ -6,7 +6,6 @@
     border-radius: 50%;
     background: none;
     cursor: pointer;
-
     width: 5rem;
     height: 5rem;
     margin-left: 4.618rem;
@@ -32,7 +31,6 @@
     gap: 1.554rem;
     font-weight: $fw-bold;
     cursor: pointer;
-
     background-color: $color-primary-500;
     color: $color-neutral-900;
     box-shadow: 0 2rem 5rem -2rem $color-primary-500;
@@ -41,7 +39,6 @@
     width: 100%;
     max-width: 31.2rem;
     height: 5.6rem;
-
     transition: background-color 0.2s ease-in;
 
     &:hover,

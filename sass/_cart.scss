@@ -40,7 +40,7 @@
         background-color: $color-primary-500;
         color: $color-neutral-100;
         border-radius: 0.65rem;
-
+        transition: all .2s ease-in-out;
         visibility: hidden;
         opacity: 0;
 
@@ -61,9 +61,7 @@
     grid-template-rows: min-content auto;
     visibility: hidden;
     opacity: 0;
-
     transition: all 0.2s ease-in-out, height 0.5s ease-in-out;
-
     width: 36rem;
     min-height: 25.6rem;
     padding: 2.4rem 0;
@@ -72,7 +70,6 @@
     top: 0;
     right: 0;
     transform: translate(50%, 3rem);
-
     background-color: $color-neutral-100;
     border-radius: 1rem;
     box-shadow: 0 2rem 5rem -2rem rgba($color-neutral-900, 0.5);
