@@ -23,6 +23,12 @@
         }
     }
 
+    &__title {
+        @include respond-to('small') {
+            font-size: 2.8rem;
+        }
+    }
+
     &__brand-text {
         text-transform: uppercase;
         font-weight: $fw-bold;

@@ -47,6 +47,7 @@ export class Gallery {
         this.thumbsDivElement = this.galleryElement.querySelector('.gallery__thumbs')!;
 
         this.thumbsDivElement.addEventListener('click', this.onClickThumbnail.bind(this));
+        this.thumbsDivElement.addEventListener('keydown', this.onClickThumbnail.bind(this));
         this.galleryElement.querySelector('.gallery__btn--previous')!.addEventListener('click', this.previousImage.bind(this));
         this.galleryElement.querySelector('.gallery__btn--next')!.addEventListener('click', this.nextImage.bind(this));
 
@@ -97,11 +98,20 @@ export class Gallery {
     }
 
     private onClickThumbnail(e: Event): void {
-        const target = e.target as HTMLImageElement;
-        if (!target || !target.dataset.imageIndex) return;
 
-        const index = +target.dataset.imageIndex;
-        this.selectImage(index);
+        if (e.type === 'keydown') {
+            const keydownEvent = e as KeyboardEvent;
+            if (keydownEvent.code !== 'Space' && keydownEvent.code !== 'Enter') return;
+        }
+        
+        const target = e.target as Element;
+        if (!target) return;
+
+        const imageElement = target.querySelector('.gallery__thumbnail-img') as HTMLImageElement || target;
+        if (!imageElement || !imageElement.dataset.imageIndex) return;
+
+        const imageIndex = +imageElement.dataset.imageIndex;
+        this.selectImage(imageIndex);
     }
 
     private render(): void {
@@ -143,10 +153,10 @@ export class Gallery {
             </figure>
             <div class="gallery__thumbs">
 
-                <figure class="gallery__thumbnail gallery__thumbnail--selected"><img src="${thumb1}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="0" /></figure>
-                <figure class="gallery__thumbnail"><img src="${thumb2}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="1" /></figure>
-                <figure class="gallery__thumbnail"><img src="${thumb3}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="2" /></figure>
-                <figure class="gallery__thumbnail"><img src="${thumb4}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="3" /></figure>
+                <figure tabindex="0" class="gallery__thumbnail gallery__thumbnail--selected"><img src="${thumb1}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="0" /></figure>
+                <figure tabindex="0" class="gallery__thumbnail"><img src="${thumb2}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="1" /></figure>
+                <figure tabindex="0" class="gallery__thumbnail"><img src="${thumb3}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="2" /></figure>
+                <figure tabindex="0" class="gallery__thumbnail"><img src="${thumb4}" alt="Sneakers" class="gallery__thumbnail-img" data-image-index="3" /></figure>
 
             </div>`;
 
