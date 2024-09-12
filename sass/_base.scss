@@ -86,6 +86,10 @@ h6 {
                 height: 4px;
                 background-color: transparent;
                 transition: 0.2s all ease-in;
+
+                @include respond-to('small') {
+                    bottom: 0;
+                }
             }
         }
 

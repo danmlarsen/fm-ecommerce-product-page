@@ -16,8 +16,15 @@ document.querySelector('.btn--add-to-cart')!.addEventListener('click', () => {
 
 const gallery = new Gallery(document.querySelector('.product__gallery')!);
 
+let backdrop: Backdrop;
+
 document.querySelector('.nav-btn')?.addEventListener('click', () => {
     document.querySelector('.navigation')?.classList.toggle('navigation--show');
 
-    Backdrop.create(() => document.querySelector('.navigation')?.classList.remove('navigation--show'));
+    backdrop = Backdrop.create(() => document.querySelector('.navigation')?.classList.remove('navigation--show'));
+});
+
+document.querySelector('.navigation__close-btn')?.addEventListener('click', () => {
+    backdrop.remove(false);
+    document.querySelector('.navigation')?.classList.remove('navigation--show');
 });
