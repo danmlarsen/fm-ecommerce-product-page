@@ -14,6 +14,7 @@ export class Amount {
             this.minValue = +this.inputElement.min;
         }
 
+        this.inputElement.addEventListener('change', this.onChange.bind(this));
         parentElement.querySelector('.amount__btn--increment')!.addEventListener('click', this.onIncrement.bind(this));
         parentElement.querySelector('.amount__btn--decrement')!.addEventListener('click', this.onDecrement.bind(this));
     }
@@ -29,6 +30,14 @@ export class Amount {
 
     private updateElement(): void {
         this.inputElement.value = this.value.toString();
+    }
+
+    private onChange(): void {
+        if (+this.inputElement.value > this.maxValue || +this.inputElement.value < this.minValue) {
+            this.inputElement.value = '1';
+        }
+
+        this.value = +this.inputElement.value;
     }
 
     private onIncrement(): void {
