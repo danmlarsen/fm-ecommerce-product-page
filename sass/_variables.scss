@@ -26,6 +26,9 @@ $fw-bold: 700;
 // Breakpoints
 //
 $breakpoints: (
+    'xlarge': (
+        min-width: 160em,
+    ),
     'large': (
         max-width: 80em,
     ),

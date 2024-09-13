@@ -31,6 +31,7 @@
         margin-bottom: 3.2rem;
 
         @include respond-to('small') {
+            max-width: 44.5rem;
             min-height: auto;
             height: 30rem;
             margin-bottom: 0;
@@ -58,6 +59,7 @@
     &__large-img {
         min-width: 100%;
         object-fit: cover;
+        object-position: top;
         transition: all 0.3s ease-in-out;
     }
 
