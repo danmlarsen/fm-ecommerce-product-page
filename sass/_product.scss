@@ -68,14 +68,4 @@
         font-weight: $fw-bold;
         text-decoration: line-through;
     }
-
-    &__buy {
-        display: flex;
-        align-items: center;
-        gap: 1.6rem;
-
-        @include respond-to('small') {
-            flex-direction: column;
-        }
-    }
 }
